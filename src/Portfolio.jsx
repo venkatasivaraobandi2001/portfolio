@@ -297,7 +297,7 @@ function ResumeDownloadBtn() {
   const handleDownload = async () => {
     setStatus("loading");
     try {
-      const res = await fetch("/Venkata_Siva_Rao_Bandi_Moodle_Developer_3Years.pdf");
+      const res = await fetch("/portfolio/Venkata_Siva_Rao_Bandi_Moodle_Developer_3Years.pdf");
       if (!res.ok) throw new Error("Not found");
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
