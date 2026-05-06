@@ -287,7 +287,7 @@ function Btn({ href, primary, children }) {
 }
 
 // ── Resume Download ────────────────────────────────────────────────────────
-// Place your resume PDF at: my-portfolio/public/resume.pdf
+// Place your resume PDF at: my-portfolio/public/Venkata_Siva_Rao_Bandi_Moodle_Developer_3Years.pdf
 // Vite serves /public files at root URL automatically.
 
 function ResumeDownloadBtn() {
@@ -297,13 +297,13 @@ function ResumeDownloadBtn() {
   const handleDownload = async () => {
     setStatus("loading");
     try {
-      const res = await fetch("/resume.pdf");
+      const res = await fetch("/Venkata_Siva_Rao_Bandi_Moodle_Developer_3Years.pdf");
       if (!res.ok) throw new Error("Not found");
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "Venkata_Siva_Rao_Bandi_Resume.pdf";
+      a.download = "Venkata_Siva_Rao_Bandi_Resume_Moodle_Developer_3Years.pdf";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -325,7 +325,7 @@ function ResumeDownloadBtn() {
       {isLoading ? (
         <><span style={{ width: 14, height: 14, border: "2px solid rgba(10,14,23,0.4)", borderTopColor: "#0a0e17", borderRadius: "50%", animation: "spin 0.7s linear infinite", display: "inline-block", flexShrink: 0 }} />Downloading…</>
       ) : isError ? (
-        <>⚠ resume.pdf missing in /public</>
+        <>⚠ Venkata_Siva_Rao_Bandi_Moodle_Developer_3Years.pdf missing in /public</>
       ) : (
         <><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Resume</>
       )}
@@ -464,9 +464,9 @@ export default function Portfolio() {
       <section id="projects" style={{ padding: "6rem 8vw", maxWidth: 1100, margin: "0 auto" }}>
         <SectionLabel>Key projects</SectionLabel>
         <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(2rem,4vw,3rem)", color: "#fff", letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>Work I'm proud of</h2>
-        <p style={{ color: "#64748b", fontSize: "0.9rem", marginBottom: "2.5rem" }}>Sorted chronologically — oldest to newest</p>
+        <p style={{ color: "#64748b", fontSize: "0.9rem", marginBottom: "2.5rem" }}>Sorted chronologically — newest to oldest</p>
         <div style={{ display: "grid", gap: "1.5rem" }}>
-          {data.projects.map((p, i) => (
+          {[...data.projects].reverse().map((p, i) => (
             <Reveal key={p.name} delay={i * 0.05}>
               <ProjectCard project={p} index={i} />
             </Reveal>
