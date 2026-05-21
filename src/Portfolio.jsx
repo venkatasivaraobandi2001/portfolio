@@ -111,7 +111,7 @@ const data = {
     },
     {
       name: "Galgano LMS – Time Spent Reporting",
-      period: "May 2025 – Dec 2025",
+      period: "May 2025 – Aug 2025",
       stack: ["Moodle", "PHP", "MySQL", "xAPI"],
       points: [
         "Integrated and extended the Course Dedication Block plugin to capture accurate time-spent data across all courses and activities.",
@@ -119,6 +119,17 @@ const data = {
         "Developed Moodle scheduled tasks (cron-based) to automatically aggregate and store time-spent data daily.",
         "Recovered and backfilled all historical time-spent records by iterating scheduled tasks manually, then switched to full automation.",
         "Integrated xAPI (Tin Can) to capture standardized learning statements, enriching reporting data.",
+      ],
+    },
+    {
+      name: "Eyhost – Hosting Management Portal",
+      period: "Sep 2025 – Dec 2025",
+      stack: ["Core PHP", "WHMCS API", "MySQL"],
+      points: [
+        "Developed a hosting management portal using Core PHP, handling end-to-end administration features for the platform.",
+        "Built and integrated WHMCS API to manage cart operations, order processing, and client billing workflows.",
+        "Implemented admin panel functionalities including user management, product configuration, and service provisioning.",
+        "Ensured secure and seamless communication between the frontend portal and the WHMCS billing system through API-based integration.",
       ],
     },
     {
@@ -396,7 +407,7 @@ export default function Portfolio() {
       </nav>
 
       {/* HERO */}
-      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "7rem 8vw 4rem", position: "relative", overflow: "hidden" }}>
+      {/* <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "7rem 8vw 4rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "-40%", right: "-20%", width: "70vw", height: "70vw", background: "radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 65%)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: "-30%", left: "-15%", width: "50vw", height: "50vw", background: "radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 65%)", pointerEvents: "none" }} />
         <div style={{ position: "relative", zIndex: 1, maxWidth: 860 }}>
@@ -415,6 +426,50 @@ export default function Portfolio() {
             <ResumeDownloadBtn />
             <Btn href="mailto:venkatasivaraobandi2001@gmail.com">Get in Touch</Btn>
           </div>
+        </div>
+      </section> */}
+      {/* HERO */}
+      <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "7rem 8vw 4rem", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: "-40%", right: "-20%", width: "70vw", height: "70vw", background: "radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 65%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: "-30%", left: "-15%", width: "50vw", height: "50vw", background: "radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 65%)", pointerEvents: "none" }} />
+
+        <div style={{ position: "relative", zIndex: 1, width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "3rem", flexWrap: "wrap" }}>
+
+          {/* LEFT — text */}
+          <div style={{ maxWidth: 620, flex: "1 1 340px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(0,212,170,0.08)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 100, padding: "0.35rem 1rem", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: ACCENT, marginBottom: "1.5rem", animation: "fadeUp 0.6s ease both" }}>
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: ACCENT, animation: "pulse 2s infinite" }} />
+              Available from June 1st, 2026
+            </div>
+            <h1 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(3rem, 7vw, 5.5rem)", lineHeight: 1.05, letterSpacing: "-0.03em", color: "#fff", margin: "0 0 1.5rem" }}>
+              Venkata<br />Siva Rao <span style={{ color: ACCENT, fontStyle: "italic" }}>Bandi</span>
+            </h1>
+            <p style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)", color: "#64748b", maxWidth: 560, lineHeight: 1.75, marginBottom: "2.5rem" }}>
+              Moodle Developer & LMS Specialist with 3+ years engineering enterprise LMS solutions — custom plugins, IOMAD multi-tenancy, xAPI/SCORM integrations, and role-based dashboards.
+            </p>
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <Btn href="#projects" primary>View Projects ↓</Btn>
+              <ResumeDownloadBtn />
+              <Btn href="mailto:venkatasivaraobandi2001@gmail.com">Get in Touch</Btn>
+            </div>
+          </div>
+
+          {/* RIGHT — photo */}
+          <div style={{ flex: "0 0 auto", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ position: "relative" }}>
+              {/* Outer glow ring */}
+              <div style={{ position: "absolute", inset: -3, borderRadius: "50%", background: "conic-gradient(from 0deg, #00d4aa, #3b82f6, #00d4aa)", animation: "spin 6s linear infinite", zIndex: 0 }} />
+              {/* White gap ring */}
+              <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: "#0a0e17", zIndex: 1, margin: 3 }} />
+              {/* Photo */}
+              <img
+                src="/portfolio/profile.jpg"
+                alt="Venkata Siva Rao Bandi"
+                style={{ width: 260, height: 260, borderRadius: "50%", objectFit: "cover", objectPosition: "center top", display: "block", position: "relative", zIndex: 2 }}
+              />
+            </div>
+          </div>
+
         </div>
       </section>
 
