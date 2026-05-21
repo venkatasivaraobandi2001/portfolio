@@ -40,14 +40,27 @@ const styles = {
 };
 
 const data = {
-  skills: [
+    skills: [
     {
       title: "Moodle Development",
-      tags: ["Moodle 3.x / 4.x / 5.0", "Local Plugins", "Block Plugins", "Report Plugins", "Module Plugins", "Theme Customization", "IOMAD", "Moodle APIs", "REST Web Services"],
+      tags: [
+        "Moodle 3.x / 4.x / 5.0",
+        "Local Plugins",
+        "Block Plugins",
+        "Report Plugins",
+        "Module Plugins",
+        "Theme Customization",
+        "Edma Theme",
+        "IOMAD",
+        "Moodle APIs",
+        "REST Web Services",
+        "Role-based Dashboards",
+        "Quiz Customization",
+      ],
     },
     {
       title: "Backend",
-      tags: ["PHP", "MySQL", "MariaDB", "PostgreSQL", "AJAX"],
+      tags: ["PHP", "Core PHP", "MySQL", "MariaDB", "PostgreSQL", "AJAX"],
     },
     {
       title: "Frontend",
@@ -55,15 +68,37 @@ const data = {
     },
     {
       title: "LMS / E-Learning",
-      tags: ["SCORM", "xAPI (Tin Can)", "Course Completion", "Proctoring", "Custom Reporting", "User Management"],
+      tags: [
+        "SCORM",
+        "xAPI (Tin Can)",
+        "Course Completion",
+        "Proctoring",
+        "Custom Reporting",
+        "User Management",
+        "Time Spent Tracking",
+        "Course Dedication Block",
+      ],
     },
     {
       title: "Integrations",
-      tags: ["Payment Gateways", "Zoom", "External APIs", "SSO (SAML)", "OAuth"],
+      tags: [
+        "Payment Gateways",
+        "Zoom",
+        "WHMCS API",
+        "External APIs",
+        "SSO (SAML)",
+        "OAuth",
+      ],
     },
     {
       title: "DevOps & Tools",
-      tags: ["Git / GitHub", "Linux (Apache)", "Cron Jobs", "Log Analysis", "Performance Debugging"],
+      tags: [
+        "Git / GitHub",
+        "Linux (Apache)",
+        "Cron Jobs",
+        "Log Analysis",
+        "Performance Debugging",
+      ],
     },
   ],
 
