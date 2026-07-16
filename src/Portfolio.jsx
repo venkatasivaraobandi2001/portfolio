@@ -40,7 +40,7 @@ const styles = {
 };
 
 const data = {
-    skills: [
+  skills: [
     {
       title: "Moodle Development",
       tags: [
@@ -102,7 +102,6 @@ const data = {
     },
   ],
 
-  // Projects sorted chronologically by start date
   projects: [
     {
       name: "Winwork LMS",
@@ -178,7 +177,7 @@ const data = {
     },
     {
       name: "Siddhanth LMS",
-      period: "Feb 2026 – Present",
+      period: "Feb 2026 – May 2026",
       stack: ["Moodle", "PHP", "MySQL"],
       points: [
         "Developed role-based custom dashboards for Admin, Teacher, Non-Editing Teacher, and Student roles — each tailored with contextually relevant data, quick actions, and navigation.",
@@ -190,9 +189,20 @@ const data = {
 
   experience: [
     {
+      company: "Moodle India",
+      role: "Moodle Developer",
+      period: "Jun 2026 – Present",
+      tag: "CURRENT",
+      points: [
+        "Working as a Moodle Developer at Moodle India, the official Moodle partner in India.",
+        "Contributing to enterprise-level Moodle implementations, custom plugin development, and LMS solutions for clients across diverse sectors.",
+      ],
+    },
+    {
       company: "Hansetech Soft Solutions Pvt. Ltd",
       role: "Junior Moodle Developer",
-      period: "Dec 2023 – Present",
+      period: "Dec 2023 – May 2026",
+      tag: null,
       points: [
         "Designed and maintained custom Moodle plugins (local, blocks, reports) and child themes for multiple enterprise clients, directly addressing unique business logic.",
         "Integrated third-party systems via Moodle APIs and web services — including Zoom, payment gateways, and external SSO authentication providers.",
@@ -207,6 +217,7 @@ const data = {
       company: "Hansetech Soft Solutions Pvt. Ltd",
       role: "Moodle Trainee",
       period: "June 2023 – Dec 2023",
+      tag: null,
       points: [
         "Learned Moodle architecture, plugin structure, and core LMS concepts under senior developer mentorship.",
         "Assisted in theme customization, basic plugin development, and platform configuration for live client sites.",
@@ -270,23 +281,14 @@ function Tag({ children }) {
   );
 }
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project }) {
   const [hov, setHov] = useState(false);
-  const isActive = project.period.includes("Present");
   return (
     <div style={{ background: "#111827", border: hov ? "1px solid rgba(0,212,170,0.22)" : "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "2rem", display: "grid", gridTemplateColumns: "1fr auto", gap: "1.5rem", transition: "all 0.25s", transform: hov ? "translateY(-3px)" : "translateY(0)", position: "relative", overflow: "hidden" }}
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #00d4aa, #3b82f6)", opacity: hov ? 1 : 0, transition: "opacity 0.25s" }} />
       <div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.4rem", flexWrap: "wrap" }}>
-          <div style={{ fontFamily: "Georgia, serif", fontSize: "1.4rem", color: "#fff" }}>{project.name}</div>
-          {isActive && (
-            <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem", background: "rgba(0,212,170,0.1)", border: "1px solid rgba(0,212,170,0.25)", borderRadius: 100, padding: "0.2rem 0.65rem", fontSize: "0.7rem", fontWeight: 600, color: ACCENT, letterSpacing: "0.06em" }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: ACCENT, animation: "pulse 2s infinite", display: "inline-block" }} />
-              ACTIVE
-            </span>
-          )}
-        </div>
+        <div style={{ fontFamily: "Georgia, serif", fontSize: "1.4rem", color: "#fff", marginBottom: "0.4rem" }}>{project.name}</div>
         <div style={{ fontFamily: "monospace", fontSize: "0.75rem", color: "#64748b", marginBottom: "1rem" }}>{project.period}</div>
         <ul style={{ paddingLeft: "1.2rem", color: "#64748b", fontSize: "0.92rem", lineHeight: 1.75 }}>
           {project.points.map((p, i) => <li key={i} style={{ marginBottom: "0.35rem" }}>{p}</li>)}
@@ -332,10 +334,6 @@ function Btn({ href, primary, children }) {
   );
 }
 
-// ── Resume Download ────────────────────────────────────────────────────────
-// Place your resume PDF at: my-portfolio/public/Venkata_Siva_Rao_Bandi_Moodle_Developer_3Years.pdf
-// Vite serves /public files at root URL automatically.
-
 function ResumeDownloadBtn() {
   const [hov, setHov] = useState(false);
   const [status, setStatus] = useState("idle");
@@ -371,7 +369,7 @@ function ResumeDownloadBtn() {
       {isLoading ? (
         <><span style={{ width: 14, height: 14, border: "2px solid rgba(10,14,23,0.4)", borderTopColor: "#0a0e17", borderRadius: "50%", animation: "spin 0.7s linear infinite", display: "inline-block", flexShrink: 0 }} />Downloading…</>
       ) : isError ? (
-        <>⚠ Venkata_Siva_Rao_Bandi_Moodle_Developer_3Years.pdf missing in /public</>
+        <>⚠ PDF missing in /public</>
       ) : (
         <><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Resume</>
       )}
@@ -379,36 +377,71 @@ function ResumeDownloadBtn() {
   );
 }
 
-// ── Experience Card ────────────────────────────────────────────────────────
+// ── Experience Timeline Card ───────────────────────────────────────────────
 
-function ExperienceCard({ exp }) {
+function ExperienceCard({ exp, isFirst }) {
   const [hov, setHov] = useState(false);
-  const isActive = exp.period.includes("Present");
+  const isCurrent = exp.period.includes("Present");
+
   return (
-    <div style={{ background: "#111827", border: hov ? "1px solid rgba(0,212,170,0.18)" : "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "2.5rem", position: "relative", overflow: "hidden", marginBottom: "1.5rem", transition: "border-color 0.25s" }}
-      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
-      <div style={{ position: "absolute", top: 0, right: 0, width: 200, height: 200, background: "radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }}>
-        <div>
-          <div style={{ fontFamily: "Georgia, serif", fontSize: "1.5rem", color: "#fff" }}>{exp.company}</div>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginTop: "0.3rem", flexWrap: "wrap" }}>
+    <div style={{ position: "relative", paddingLeft: "2rem", marginBottom: "0" }}>
+
+      {/* Timeline dot */}
+      <div style={{
+        position: "absolute", left: 0, top: "2.6rem",
+        width: 14, height: 14, borderRadius: "50%",
+        background: isCurrent ? ACCENT : "#1e3a4a",
+        border: `2px solid ${isCurrent ? ACCENT : "#334155"}`,
+        boxShadow: isCurrent ? `0 0 12px rgba(0,212,170,0.5)` : "none",
+        zIndex: 1,
+      }} />
+
+      {/* Card */}
+      <div style={{
+        background: isCurrent ? "linear-gradient(135deg, #0f2a1e 0%, #111827 100%)" : "#111827",
+        border: isCurrent
+          ? "1px solid rgba(0,212,170,0.3)"
+          : hov ? "1px solid rgba(0,212,170,0.15)" : "1px solid rgba(255,255,255,0.07)",
+        borderRadius: 16, padding: "2rem 2.5rem",
+        position: "relative", overflow: "hidden",
+        marginBottom: "1.5rem",
+        transition: "border-color 0.25s",
+      }}
+        onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
+
+        {/* Top accent bar for current */}
+        {isCurrent && (
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #00d4aa, #3b82f6)" }} />
+        )}
+
+        <div style={{ position: "absolute", top: 0, right: 0, width: 200, height: 200, background: `radial-gradient(circle, ${isCurrent ? "rgba(0,212,170,0.08)" : "rgba(0,212,170,0.04)"} 0%, transparent 70%)`, pointerEvents: "none" }} />
+
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }}>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap", marginBottom: "0.3rem" }}>
+              <div style={{ fontFamily: "Georgia, serif", fontSize: "1.45rem", color: "#fff" }}>{exp.company}</div>
+              {isCurrent && (
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem", background: "rgba(0,212,170,0.12)", border: "1px solid rgba(0,212,170,0.3)", borderRadius: 100, padding: "0.2rem 0.75rem", fontSize: "0.68rem", fontWeight: 700, color: ACCENT, letterSpacing: "0.08em" }}>
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: ACCENT, animation: "pulse 2s infinite", display: "inline-block" }} />
+                  CURRENT
+                </span>
+              )}
+            </div>
             <div style={{ color: ACCENT, fontWeight: 600, fontSize: "0.88rem" }}>{exp.role}</div>
-            {isActive && (
-              <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem", background: "rgba(0,212,170,0.1)", border: "1px solid rgba(0,212,170,0.25)", borderRadius: 100, padding: "0.15rem 0.6rem", fontSize: "0.66rem", fontWeight: 600, color: ACCENT, letterSpacing: "0.06em" }}>
-                <span style={{ width: 5, height: 5, borderRadius: "50%", background: ACCENT, animation: "pulse 2s infinite", display: "inline-block" }} />CURRENT
-              </span>
-            )}
+          </div>
+          <div style={{ fontFamily: "monospace", fontSize: "0.8rem", color: isCurrent ? ACCENT : "#64748b", background: isCurrent ? "rgba(0,212,170,0.08)" : "rgba(255,255,255,0.04)", border: `1px solid ${isCurrent ? "rgba(0,212,170,0.2)" : "rgba(255,255,255,0.07)"}`, borderRadius: 8, padding: "0.5rem 1rem", whiteSpace: "nowrap" }}>
+            {exp.period}
           </div>
         </div>
-        <div style={{ fontFamily: "monospace", fontSize: "0.8rem", color: "#64748b", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 8, padding: "0.5rem 1rem", whiteSpace: "nowrap" }}>{exp.period}</div>
+
+        <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "0.7rem" }}>
+          {exp.points.map((pt, i) => (
+            <li key={i} style={{ display: "flex", gap: "0.75rem", color: "#64748b", fontSize: "0.93rem", lineHeight: 1.7 }}>
+              <span style={{ color: ACCENT, flexShrink: 0, marginTop: "0.05rem" }}>→</span>{pt}
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-        {exp.points.map((pt, i) => (
-          <li key={i} style={{ display: "flex", gap: "0.75rem", color: "#64748b", fontSize: "0.95rem", lineHeight: 1.7 }}>
-            <span style={{ color: ACCENT, flexShrink: 0 }}>→</span>{pt}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
@@ -438,43 +471,28 @@ export default function Portfolio() {
           {[["#about","About"],["#skills","Skills"],["#projects","Projects"],["#experience","Experience"],["#contact","Contact"]].map(([h,l]) => (
             <NavLink key={h} href={h}>{l}</NavLink>
           ))}
+          <li>
+            <a href="https://linkedin.com/in/venkata-sivarao-bandi-051ab3264"
+               target="_blank" rel="noreferrer"
+               style={{ color: "#64748b", textDecoration: "none", fontSize: "0.82rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", transition: "color 0.2s" }}
+               onMouseEnter={e => e.target.style.color = "#00d4aa"}
+               onMouseLeave={e => e.target.style.color = "#64748b"}>
+              LinkedIn ↗
+            </a>
+          </li>
         </ul>
       </nav>
 
-      {/* HERO */}
-      {/* <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "7rem 8vw 4rem", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "-40%", right: "-20%", width: "70vw", height: "70vw", background: "radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 65%)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: "-30%", left: "-15%", width: "50vw", height: "50vw", background: "radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 65%)", pointerEvents: "none" }} />
-        <div style={{ position: "relative", zIndex: 1, maxWidth: 860 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(0,212,170,0.08)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 100, padding: "0.35rem 1rem", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: ACCENT, marginBottom: "1.5rem", animation: "fadeUp 0.6s ease both" }}>
-            <span style={{ width: 7, height: 7, borderRadius: "50%", background: ACCENT, animation: "pulse 2s infinite" }} />
-            Available from June 1st, 2026
-          </div>
-          <h1 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(3rem, 7vw, 5.5rem)", lineHeight: 1.05, letterSpacing: "-0.03em", color: "#fff", margin: "0 0 1.5rem" }}>
-            Venkata<br />Siva Rao <span style={{ color: ACCENT, fontStyle: "italic" }}>Bandi</span>
-          </h1>
-          <p style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)", color: "#64748b", maxWidth: 560, lineHeight: 1.75, marginBottom: "2.5rem" }}>
-            Moodle Developer & LMS Specialist with 3+ years engineering enterprise LMS solutions — custom plugins, IOMAD multi-tenancy, xAPI/SCORM integrations, and role-based dashboards.
-          </p>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <Btn href="#projects" primary>View Projects ↓</Btn>
-            <ResumeDownloadBtn />
-            <Btn href="mailto:venkatasivaraobandi2001@gmail.com">Get in Touch</Btn>
-          </div>
-        </div>
-      </section> */}
       {/* HERO */}
       <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "7rem 8vw 4rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "-40%", right: "-20%", width: "70vw", height: "70vw", background: "radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 65%)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: "-30%", left: "-15%", width: "50vw", height: "50vw", background: "radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 65%)", pointerEvents: "none" }} />
 
         <div style={{ position: "relative", zIndex: 1, width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "3rem", flexWrap: "wrap" }}>
-
-          {/* LEFT — text */}
           <div style={{ maxWidth: 620, flex: "1 1 340px" }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(0,212,170,0.08)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 100, padding: "0.35rem 1rem", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: ACCENT, marginBottom: "1.5rem", animation: "fadeUp 0.6s ease both" }}>
               <span style={{ width: 7, height: 7, borderRadius: "50%", background: ACCENT, animation: "pulse 2s infinite" }} />
-              Available from June 1st, 2026
+              Moodle Developer @ Moodle India
             </div>
             <h1 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(3rem, 7vw, 5.5rem)", lineHeight: 1.05, letterSpacing: "-0.03em", color: "#fff", margin: "0 0 1.5rem" }}>
               Venkata<br />Siva Rao <span style={{ color: ACCENT, fontStyle: "italic" }}>Bandi</span>
@@ -489,22 +507,13 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* RIGHT — photo */}
           <div style={{ flex: "0 0 auto", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ position: "relative" }}>
-              {/* Outer glow ring */}
               <div style={{ position: "absolute", inset: -3, borderRadius: "50%", background: "conic-gradient(from 0deg, #00d4aa, #3b82f6, #00d4aa)", animation: "spin 6s linear infinite", zIndex: 0 }} />
-              {/* White gap ring */}
               <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: "#0a0e17", zIndex: 1, margin: 3 }} />
-              {/* Photo */}
-              <img
-                src="/portfolio/profile.jpg"
-                alt="Venkata Siva Rao Bandi"
-                style={{ width: 260, height: 260, borderRadius: "50%", objectFit: "cover", objectPosition: "center top", display: "block", position: "relative", zIndex: 2 }}
-              />
+              <img src="/portfolio/profile.jpg" alt="Venkata Siva Rao Bandi" style={{ width: 260, height: 260, borderRadius: "50%", objectFit: "cover", objectPosition: "center top", display: "block", position: "relative", zIndex: 2 }} />
             </div>
           </div>
-
         </div>
       </section>
 
@@ -518,7 +527,7 @@ export default function Portfolio() {
                 Building the future<br />of online learning
               </h2>
               <p style={{ color: "#64748b", fontSize: "1.05rem", lineHeight: 1.8, marginBottom: "1.2rem" }}>
-                I'm a Moodle specialist based in <strong style={{ color: "#e2e8f0" }}>Hyderabad, India</strong>, focused on delivering enterprise-grade LMS solutions. I design and build custom plugins, integrate third-party APIs, and handle everything from database debugging to live production upgrades — including Moodle 3.x → 4.x → 5.0 with zero data loss.
+                I'm a Moodle specialist based in <strong style={{ color: "#e2e8f0" }}>Hyderabad, India</strong>, currently working at <strong style={{ color: ACCENT }}>Moodle India</strong> — the official Moodle partner. I design and build custom plugins, integrate third-party APIs, and handle everything from database debugging to live production upgrades including Moodle 3.x → 4.x → 5.0 with zero data loss.
               </p>
               <p style={{ color: "#64748b", fontSize: "1.05rem", lineHeight: 1.8, marginBottom: "1.5rem" }}>
                 From multi-tenant IOMAD deployments for international banks to xAPI-powered SCORM tracking and role-based dashboards, I work across the full Moodle stack.
@@ -526,7 +535,7 @@ export default function Portfolio() {
               <Btn href="mailto:venkatasivaraobandi2001@gmail.com">Say hello →</Btn>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 12, overflow: "hidden" }}>
-              {[["3+","Years Experience"],["7","Projects Delivered"],["5.0","Moodle Expert"],["0","Data Loss on Upgrades"]].map(([num, label]) => (
+              {[["3+","Years Experience"],["8","Projects Delivered"],["5.0","Moodle Expert"],["0","Data Loss on Upgrades"]].map(([num, label]) => (
                 <div key={label} style={{ background: "#111827", padding: "2rem 1.5rem", textAlign: "center" }}>
                   <div style={{ fontFamily: "Georgia, serif", fontSize: "2.5rem", color: ACCENT, lineHeight: 1 }}>{num}</div>
                   <div style={{ fontSize: "0.78rem", color: "#64748b", marginTop: "0.4rem", textTransform: "uppercase", letterSpacing: "0.06em" }}>{label}</div>
@@ -558,7 +567,7 @@ export default function Portfolio() {
         <div style={{ display: "grid", gap: "1.5rem" }}>
           {[...data.projects].reverse().map((p, i) => (
             <Reveal key={p.name} delay={i * 0.05}>
-              <ProjectCard project={p} index={i} />
+              <ProjectCard project={p} />
             </Reveal>
           ))}
         </div>
@@ -567,12 +576,20 @@ export default function Portfolio() {
       {/* EXPERIENCE */}
       <section id="experience" style={{ padding: "0 8vw 6rem", maxWidth: 1100, margin: "0 auto" }}>
         <SectionLabel>Experience</SectionLabel>
-        <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(2rem,4vw,3rem)", color: "#fff", letterSpacing: "-0.02em", marginBottom: "2.5rem" }}>Where I've worked</h2>
-        {data.experience.map(exp => (
-          <Reveal key={exp.role}>
-            <ExperienceCard exp={exp} />
-          </Reveal>
-        ))}
+        <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(2rem,4vw,3rem)", color: "#fff", letterSpacing: "-0.02em", marginBottom: "0.5rem" }}>Where I've worked</h2>
+        <p style={{ color: "#64748b", fontSize: "0.9rem", marginBottom: "2.5rem" }}>3+ years across 2 companies · Newest first</p>
+
+        {/* Timeline wrapper */}
+        <div style={{ position: "relative", paddingLeft: "0.5rem" }}>
+          {/* Vertical line */}
+          <div style={{ position: "absolute", left: "0.4rem", top: "3rem", bottom: "2rem", width: 2, background: "linear-gradient(to bottom, #00d4aa, #1e3a4a 80%)", borderRadius: 2 }} />
+
+          {data.experience.map((exp, i) => (
+            <Reveal key={exp.role + exp.company} delay={i * 0.1}>
+              <ExperienceCard exp={exp} isFirst={i === 0} />
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       {/* CONTACT */}
@@ -585,13 +602,14 @@ export default function Portfolio() {
               Let's build something<br /><span style={{ color: ACCENT, fontStyle: "italic" }}>together</span>
             </h2>
             <p style={{ color: "#64748b", maxWidth: 420, margin: "0 auto 2.5rem", fontSize: "1rem", lineHeight: 1.75 }}>
-              Open to new opportunities and freelance Moodle projects. Available from June 1st, 2026.
+              Open to freelance Moodle projects and consulting engagements. Currently at Moodle India.
             </p>
             <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
               {[
                 { href: "mailto:venkatasivaraobandi2001@gmail.com", label: "venkatasivaraobandi2001@gmail.com" },
                 { href: "tel:+918790546037", label: "+91 8790546037" },
-                { href: "https://github.com", label: "GitHub" },
+                { href: "https://linkedin.com/in/venkata-sivarao-bandi-051ab3264", label: "LinkedIn ↗" },
+                { href: "https://github.com", label: "GitHub ↗" },
               ].map(link => <ContactChip key={link.href} {...link} />)}
             </div>
           </div>
@@ -600,7 +618,7 @@ export default function Portfolio() {
 
       {/* FOOTER */}
       <footer style={{ textAlign: "center", padding: "2rem 5vw", color: "#64748b", fontSize: "0.82rem", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-        © 2026 Venkata Siva Rao Bandi · Hyderabad, India
+        © 2026 Venkata Siva Rao Bandi · Moodle Developer @ Moodle India · Hyderabad, India
       </footer>
     </div>
   );
