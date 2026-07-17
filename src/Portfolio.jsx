@@ -284,7 +284,7 @@ function Tag({ children }) {
 function ProjectCard({ project }) {
   const [hov, setHov] = useState(false);
   return (
-    <div style={{ background: "#111827", border: hov ? "1px solid rgba(0,212,170,0.22)" : "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "2rem", display: "grid", gridTemplateColumns: "1fr auto", gap: "1.5rem", transition: "all 0.25s", transform: hov ? "translateY(-3px)" : "translateY(0)", position: "relative", overflow: "hidden" }}
+    <div className="project-card" style={{ background: "#111827", border: hov ? "1px solid rgba(0,212,170,0.22)" : "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "2rem", display: "grid", gridTemplateColumns: "1fr auto", gap: "1.5rem", transition: "all 0.25s", transform: hov ? "translateY(-3px)" : "translateY(0)", position: "relative", overflow: "hidden" }}
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #00d4aa, #3b82f6)", opacity: hov ? 1 : 0, transition: "opacity 0.25s" }} />
       <div>
@@ -294,7 +294,7 @@ function ProjectCard({ project }) {
           {project.points.map((p, i) => <li key={i} style={{ marginBottom: "0.35rem" }}>{p}</li>)}
         </ul>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem", minWidth: 130 }}>
+      <div className="project-stack" style={{ display: "flex", flexDirection: "column", gap: "0.4rem", minWidth: 130 }}>
         {project.stack.map(s => (
           <span key={s} style={{ background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.2)", borderRadius: 6, padding: "0.3rem 0.75rem", fontFamily: "monospace", fontSize: "0.74rem", color: "#93c5fd", textAlign: "center", whiteSpace: "nowrap" }}>{s}</span>
         ))}
@@ -327,7 +327,7 @@ function ContactChip({ href, label }) {
 function Btn({ href, primary, children }) {
   const [hov, setHov] = useState(false);
   return (
-    <a href={href} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.85rem 2rem", borderRadius: 8, fontSize: "0.9rem", fontWeight: 600, textDecoration: "none", transition: "all 0.2s", fontFamily: "inherit", background: primary ? (hov ? "#00f0c0" : ACCENT) : "transparent", color: primary ? "#0a0e17" : "#e2e8f0", border: primary ? "none" : "1px solid rgba(255,255,255,0.1)", transform: hov && primary ? "translateY(-2px)" : "translateY(0)", boxShadow: hov && primary ? "0 8px 25px rgba(0,212,170,0.28)" : "none" }}
+    <a href={href} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", padding: "0.85rem 2rem", borderRadius: 8, fontSize: "0.9rem", fontWeight: 600, textDecoration: "none", transition: "all 0.2s", fontFamily: "inherit", background: primary ? (hov ? "#00f0c0" : ACCENT) : "transparent", color: primary ? "#0a0e17" : "#e2e8f0", border: primary ? "none" : "1px solid rgba(255,255,255,0.1)", transform: hov && primary ? "translateY(-2px)" : "translateY(0)", boxShadow: hov && primary ? "0 8px 25px rgba(0,212,170,0.28)" : "none" }}
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
       {children}
     </a>
@@ -365,11 +365,11 @@ function ResumeDownloadBtn() {
   return (
     <button onClick={handleDownload} disabled={isLoading}
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ display: "inline-flex", alignItems: "center", gap: "0.55rem", padding: "0.85rem 2rem", borderRadius: 8, fontSize: "0.9rem", fontWeight: 600, border: "none", cursor: isLoading ? "wait" : "pointer", fontFamily: "inherit", transition: "all 0.2s", background: isError ? "#ef4444" : hov ? "#00f0c0" : ACCENT, color: isError ? "#fff" : "#0a0e17", transform: hov && !isLoading && !isError ? "translateY(-2px)" : "translateY(0)", boxShadow: hov && !isLoading && !isError ? "0 8px 25px rgba(0,212,170,0.28)" : "none", opacity: isLoading ? 0.75 : 1 }}>
+      style={{ display: "inline-flex", justifyContent: "center", alignItems: "center", gap: "0.55rem", padding: "0.85rem 2rem", borderRadius: 8, fontSize: "0.9rem", fontWeight: 600, border: "none", cursor: isLoading ? "wait" : "pointer", fontFamily: "inherit", transition: "all 0.2s", background: isError ? "#ef4444" : hov ? "#00f0c0" : ACCENT, color: isError ? "#fff" : "#0a0e17", transform: hov && !isLoading && !isError ? "translateY(-2px)" : "translateY(0)", boxShadow: hov && !isLoading && !isError ? "0 8px 25px rgba(0,212,170,0.28)" : "none", opacity: isLoading ? 0.75 : 1 }}>
       {isLoading ? (
         <><span style={{ width: 14, height: 14, border: "2px solid rgba(10,14,23,0.4)", borderTopColor: "#0a0e17", borderRadius: "50%", animation: "spin 0.7s linear infinite", display: "inline-block", flexShrink: 0 }} />Downloading…</>
       ) : isError ? (
-        <>⚠ PDF missing in /public</>
+        <>⚠ PDF missing</>
       ) : (
         <><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Resume</>
       )}
@@ -416,7 +416,7 @@ function ExperienceCard({ exp, isFirst }) {
 
         <div style={{ position: "absolute", top: 0, right: 0, width: 200, height: 200, background: `radial-gradient(circle, ${isCurrent ? "rgba(0,212,170,0.08)" : "rgba(0,212,170,0.04)"} 0%, transparent 70%)`, pointerEvents: "none" }} />
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }}>
+        <div className="exp-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap", marginBottom: "0.3rem" }}>
               <div style={{ fontFamily: "Georgia, serif", fontSize: "1.45rem", color: "#fff" }}>{exp.company}</div>
@@ -449,6 +449,8 @@ function ExperienceCard({ exp, isFirst }) {
 // ── Main App ───────────────────────────────────────────────────────────────
 
 export default function Portfolio() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
@@ -458,22 +460,88 @@ export default function Portfolio() {
 
   return (
     <div style={styles.root}>
+      {/* ── RESPONSIVE CSS INJECTED HERE ── */}
       <style>{`
         @keyframes fadeUp { from { opacity:0; transform:translateY(24px) } to { opacity:1; transform:translateY(0) } }
         @keyframes pulse  { 0%,100%{opacity:1} 50%{opacity:0.3} }
         @keyframes spin   { to { transform: rotate(360deg) } }
+
+        .mobile-menu-btn { display: none; background: transparent; border: none; color: #00d4aa; font-size: 2rem; cursor: pointer; padding: 0; line-height: 1; }
+
+        @media (max-width: 850px) {
+          /* Navigation */
+          .desktop-nav { display: none !important; }
+          .mobile-menu-btn { display: block; }
+          
+          /* Hero Section */
+          .hero-container { justify-content: center !important; text-align: center; gap: 2rem !important; }
+          .hero-buttons { justify-content: center !important; }
+          .hero-badge { margin: 0 auto 1.5rem auto !important; }
+          
+          /* Grids */
+          .about-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+          .project-card { grid-template-columns: 1fr !important; gap: 1rem !important; }
+          .project-stack { flex-direction: row !important; flex-wrap: wrap !important; min-width: auto !important; }
+          
+          /* Experience */
+          .exp-header { flex-direction: column !important; align-items: flex-start !important; }
+        }
       `}</style>
+
+      {/* MOBILE MENU BACKDROP */}
+      {isMobileMenuOpen && (
+        <div 
+          onClick={() => setIsMobileMenuOpen(false)}
+          style={{
+            position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+            background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)",
+            zIndex: 999
+          }} 
+        />
+      )}
+
+      {/* MOBILE MENU DRAWER */}
+      {isMobileMenuOpen && (
+        <div style={{
+          position: "fixed", top: 0, right: 0, bottom: 0,
+          width: "70vw", maxWidth: "300px",
+          background: "rgba(10,14,23,0.98)",
+          borderLeft: "1px solid rgba(255,255,255,0.07)",
+          zIndex: 1000, display: "flex", flexDirection: "column",
+          alignItems: "flex-start", padding: "5rem 2.5rem", gap: "2rem",
+          boxShadow: "-10px 0 30px rgba(0,0,0,0.5)"
+        }}>
+          <button onClick={() => setIsMobileMenuOpen(false)} style={{
+            position: "absolute", top: "1.2rem", right: "1.5rem",
+            background: "transparent", border: "none", color: "#e2e8f0",
+            fontSize: "2.5rem", cursor: "pointer", lineHeight: 1
+          }}>×</button>
+          
+          {[["#about","About"],["#skills","Skills"],["#projects","Projects"],["#experience","Experience"],["#contact","Contact"]].map(([h,l]) => (
+            <a key={h} href={h} onClick={() => setIsMobileMenuOpen(false)}
+               style={{ color: "#fff", textDecoration: "none", fontSize: "1.2rem", fontWeight: 600 }}>
+              {l}
+            </a>
+          ))}
+          <a href="https://linkedin.com/in/venkata-sivarao-bandi-051ab3264" target="_blank" rel="noreferrer"
+             onClick={() => setIsMobileMenuOpen(false)}
+             style={{ color: ACCENT, textDecoration: "none", fontSize: "1.2rem", fontWeight: 600 }}>
+            LinkedIn ↗
+          </a>
+        </div>
+      )}
 
       {/* NAV */}
       <nav style={styles.nav}>
         <div style={styles.navLogo}>VSR.</div>
-        <ul style={styles.navLinks}>
+        
+        {/* Desktop Links */}
+        <ul className="desktop-nav" style={styles.navLinks}>
           {[["#about","About"],["#skills","Skills"],["#projects","Projects"],["#experience","Experience"],["#contact","Contact"]].map(([h,l]) => (
             <NavLink key={h} href={h}>{l}</NavLink>
           ))}
           <li>
-            <a href="https://linkedin.com/in/venkata-sivarao-bandi-051ab3264"
-               target="_blank" rel="noreferrer"
+            <a href="https://linkedin.com/in/venkata-sivarao-bandi-051ab3264" target="_blank" rel="noreferrer"
                style={{ color: "#64748b", textDecoration: "none", fontSize: "0.82rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", transition: "color 0.2s" }}
                onMouseEnter={e => e.target.style.color = "#00d4aa"}
                onMouseLeave={e => e.target.style.color = "#64748b"}>
@@ -481,6 +549,11 @@ export default function Portfolio() {
             </a>
           </li>
         </ul>
+        
+        {/* Mobile Hamburger Button */}
+        <button className="mobile-menu-btn" onClick={() => setIsMobileMenuOpen(true)}>
+          ☰
+        </button>
       </nav>
 
       {/* HERO */}
@@ -488,32 +561,36 @@ export default function Portfolio() {
         <div style={{ position: "absolute", top: "-40%", right: "-20%", width: "70vw", height: "70vw", background: "radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 65%)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: "-30%", left: "-15%", width: "50vw", height: "50vw", background: "radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 65%)", pointerEvents: "none" }} />
 
-        <div style={{ position: "relative", zIndex: 1, width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "3rem", flexWrap: "wrap" }}>
+        <div className="hero-container" style={{ position: "relative", zIndex: 1, width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "3rem", flexWrap: "wrap" }}>
+          
           <div style={{ maxWidth: 620, flex: "1 1 340px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(0,212,170,0.08)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 100, padding: "0.35rem 1rem", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: ACCENT, marginBottom: "1.5rem", animation: "fadeUp 0.6s ease both" }}>
+            <div className="hero-badge" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(0,212,170,0.08)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 100, padding: "0.35rem 1rem", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: ACCENT, marginBottom: "1.5rem", animation: "fadeUp 0.6s ease both" }}>
               <span style={{ width: 7, height: 7, borderRadius: "50%", background: ACCENT, animation: "pulse 2s infinite" }} />
               Moodle Developer @ Moodle India
             </div>
             <h1 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(3rem, 7vw, 5.5rem)", lineHeight: 1.05, letterSpacing: "-0.03em", color: "#fff", margin: "0 0 1.5rem" }}>
               Venkata<br />Siva Rao <span style={{ color: ACCENT, fontStyle: "italic" }}>Bandi</span>
             </h1>
-            <p style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)", color: "#64748b", maxWidth: 560, lineHeight: 1.75, marginBottom: "2.5rem" }}>
+            <p style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)", color: "#64748b", maxWidth: 560, lineHeight: 1.75, margin: "0 auto 2.5rem" }}>
               Moodle Developer & LMS Specialist with 3+ years engineering enterprise LMS solutions — custom plugins, IOMAD multi-tenancy, xAPI/SCORM integrations, and role-based dashboards.
             </p>
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <div className="hero-buttons" style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
               <Btn href="#projects" primary>View Projects ↓</Btn>
               <ResumeDownloadBtn />
               <Btn href="mailto:venkatasivaraobandi2001@gmail.com">Get in Touch</Btn>
             </div>
           </div>
 
-          <div style={{ flex: "0 0 auto", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ flex: "0 0 auto", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>
             <div style={{ position: "relative" }}>
               <div style={{ position: "absolute", inset: -3, borderRadius: "50%", background: "conic-gradient(from 0deg, #00d4aa, #3b82f6, #00d4aa)", animation: "spin 6s linear infinite", zIndex: 0 }} />
               <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: "#0a0e17", zIndex: 1, margin: 3 }} />
-              <img src="/portfolio/profile.jpg" alt="Venkata Siva Rao Bandi" style={{ width: 260, height: 260, borderRadius: "50%", objectFit: "cover", objectPosition: "center top", display: "block", position: "relative", zIndex: 2 }} />
+              
+              {/* Used CSS clamp to scale down safely on mobile */}
+              <img src="/portfolio/profile.jpg" alt="Venkata Siva Rao Bandi" style={{ width: "clamp(180px, 50vw, 260px)", height: "clamp(180px, 50vw, 260px)", borderRadius: "50%", objectFit: "cover", objectPosition: "center top", display: "block", position: "relative", zIndex: 2 }} />
             </div>
           </div>
+          
         </div>
       </section>
 
@@ -521,7 +598,7 @@ export default function Portfolio() {
       <section id="about" style={{ padding: "6rem 8vw", maxWidth: 1100, margin: "0 auto" }}>
         <SectionLabel>About me</SectionLabel>
         <Reveal>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
+          <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
             <div>
               <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(2rem,4vw,3rem)", color: "#fff", letterSpacing: "-0.02em", marginBottom: "1.5rem" }}>
                 Building the future<br />of online learning
