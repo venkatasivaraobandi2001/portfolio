@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-
 const ACCENT = "#00d4aa";
 
 const styles = {
